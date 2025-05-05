@@ -10,10 +10,45 @@ Adafruit_LIS2MDL mag = Adafruit_LIS2MDL(00002);
 const float g = 9.81;
 const float pi = 3.14159;
 
-void updateSensors(){
+//Serial monitor commands to display cartesian values of acceleration 
+void cartesianAccDisplay(float xA,float yA, float zA){
 
+  Serial.print(" x: ");
+  Serial.print(xA);
+  Serial.print(" y: ");
+  Serial.print(yA);
+  Serial.print(" z: ");
+  Serial.print(zA);
+
+}
+
+//Serial monitor commands to display cartesian values of magnetic field 
+void cartesianMagDisplay(float xM, float yM, float zM){
+
+  Serial.print(" x: ");
+  Serial.print(xM);
+  Serial.print(" y: ");
+  Serial.print(yM);
+  Serial.print(" z: ");
+  Serial.print(zM);
+
+}
+//Serial monitor commands to display pitch value of device from accelerometer
+void yawDisplay(float yaw){
+
+  Serial.print("    Yaw: ");
+  Serial.print(yaw);
+  Serial.print(" Degrees");   
+
+}
+
+//Serial monitor commands to display yaw value of device from accelerometer
+void pitchDisplay(float pitch){
+
+  Serial.print("    Pitch: ");
+  Serial.print(pitch);
+  Serial.print(" Degrees");   
   
-
 }
 
 void setup(void) {
@@ -83,33 +118,13 @@ void loop() {
   
   //calculating yaw from magnetometer readings
   mag.getEvent(&mag_event);
-  yaw = atan2(yM,xM)*(180/pi) + 180; //+180 to normalize on 0-360 doesn't work as intended, or magnetic interference CHANGE
+  yaw = (atan2(yM,xM)*(180/pi)) + 180; //+180 to normalize on 0-360 doesn't work as intended, or magnetic interference !!CHANGE!!
   
-/* serial display for cartesian acceleration
-  Serial.print(" x: ");
-  Serial.print(xA);
-  Serial.print(" y: ");
-  Serial.print(yA);
-  Serial.print(" z: ");
-  Serial.println(zA);
-*/
-  // serial display for cartesian magetic field
-  Serial.print(" x: ");
-  Serial.print(xM);
-  Serial.print(" y: ");
-  Serial.print(yM);
-  Serial.print(" z: ");
-  Serial.print(zM);
+  cartesianMagDisplay(xM,yM,zM);
+  //cartesianAccDisplay(xA,yA,zA);
+  pitchDisplay(pitch);
+  yawDisplay(yaw);
 
-  // serial display for pitch angle
-  Serial.print("    Pitch: ");
-  Serial.print(pitch);
-  Serial.print(" Degrees");   
-  delay(100);
-
-  // serial display for yaw angle
-  Serial.print("    Yaw: ");
-  Serial.print(yaw);
-  Serial.println(" Degrees");   
+  Serial.println("");
   delay(100);
 }
