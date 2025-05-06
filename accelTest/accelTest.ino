@@ -118,8 +118,15 @@ void loop() {
   
   //calculating yaw from magnetometer readings
   mag.getEvent(&mag_event);
-  yaw = (atan2(yM,xM)*(180/pi)) + 180; //+180 to normalize on 0-360 doesn't work as intended, or magnetic interference !!CHANGE!!
-  
+  yaw = (atan2(yM,xM)*(180/pi));
+  if(yaw < 0){ //normalizes values to 0-360, since atan2() returns q3 and q4 angles as negative
+    yaw = yaw + 360;
+  }
+
+  Serial.print("yM/xM: ");
+  Serial.print(yM/xM);
+  Serial.print(" ");
+
   cartesianMagDisplay(xM,yM,zM);
   //cartesianAccDisplay(xA,yA,zA);
   pitchDisplay(pitch);
