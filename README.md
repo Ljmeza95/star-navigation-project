@@ -25,3 +25,8 @@ Using GPStest
 3. plug in arduino, select board in top left dropdown, and run
 
 4. If it says "access not granted," unplug arduino and repeat 3
+
+
+------------------------------REFERENCES------------------------------------
+
+Calculating Local Sidereal Time (LST) - https://archive.aoe.vt.edu/lutze/AOE4134/13LocalSiderealTime.pdf
