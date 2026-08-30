@@ -1,0 +1,3 @@
+[submodule "SuperNOVAS"]
+	path = SuperNOVAS
+	url = https://github.com/Sigmyne/SuperNOVAS.git
